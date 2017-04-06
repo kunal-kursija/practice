@@ -1,0 +1,69 @@
+<?php
+
+/**
+ * @file
+ * Module file consisting of important hooks & helper functions.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_help().
+ */
+function practice_help($route_name, RouteMatchInterface $route_match) {
+  // We are writing hook_help, Because this is a good practice.
+  switch ($route_name) {
+    // Path Matching.
+    case 'help.page.practice':
+      // Output String.
+      $output = t('This is an practice module.');
+      // Return the output.
+      return $output;
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function practice_form_system_site_information_settings_alter(&$form, FormStateInterface $form_state, $form_id) {
+  // Step 1: Lets add the API Key Form Element, With Its default value coming
+  // from this module's Configuration.
+  $form['site_information']['site_api_key'] = [
+    '#type' => 'textfield',
+    '#title' => t('Site API Key'),
+    '#description' => t('Stores API Key of your site.'),
+    '#required' => TRUE,
+    '#default_value' => \Drupal::config('practice.settings')->get('siteapikey'),
+  ];
+  // Step 2: Change Submit Button Text.
+  $form['actions']['submit']['#value'] = t('Update Configuration');
+  // Step 3: Adding Submit Handler.
+  $form['actions']['submit']['#submit'][] = 'practice_system_site_information_settings_submit';
+}
+
+/**
+ * Implements Custom Submit Handler for Site-Config form.
+ */
+function practice_system_site_information_settings_submit($form, FormStateInterface $form_state) {
+  // NOTE: We will always be running this submit button & the actions inside it,
+  // Irrespective of Key has been changed or not.
+  // Step 1: Get Submitted Site API Key.
+  $site_api_key = $form_state->getValue('site_api_key');
+  // Step 2: Save the Site API Key as Configuration.
+  _practice_save_siteapikey($site_api_key);
+  // Step 3: Set the message with API displayed as Emphasized text(<em>).
+  drupal_set_message(t('Site API Key has been saved with the value %site_api_key', ['%site_api_key' => $site_api_key]));
+}
+
+/**
+ * Helper function to save Site API Key.
+ *
+ * @param string $site_api_key
+ *   Site API Key.
+ */
+function _practice_save_siteapikey($site_api_key) {
+  \Drupal::configFactory()->getEditable('practice.settings')
+    ->set('siteapikey', $site_api_key)
+    ->save();
+}

@@ -1,0 +1,25 @@
+# Machine name of our route.
+practice.nodeserializer:
+  # Path That our route can be found at.
+  path: 'page_json/{siteapikey}/{node}'
+  # Fixed Default Values Like Callback Class & Functions.
+  defaults:
+    _controller: '\Drupal\practice\Controller\NodeSerializer::getJson'
+    _title_callback: '\Drupal\practice\Controller\NodeSerializer::getPageTitle'
+  # Requirements anyone accessing this route must obey.
+  requirements:
+    # Using the default permission to reduce dependencies, Otherwise we can create our own permissions too.
+    _permission: 'access content'
+    # Optionally using this key to specify that this module needs NODE & serialization modules to serve this path.
+    _module_dependencies: 'node + serialization'
+    # SANITIZATION of node parameter, Hence asking for integers only.
+    node: \d+
+  # Defining Options.
+  options:
+    parameters:
+      siteapikey:
+        type: siteapikey
+      node:
+        type: entity:node
+  # Optional key, But we are adding for better practice & specifying this means Incoming Request is GET request.
+  methods: [GET]

@@ -1,0 +1,16 @@
+<?php
+
+/**
+ * @file
+ * This file contains code that will be executed during Module Install.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function practice_install() {
+  // We will show a success message when the module gets installed.
+  // Although Drupal shows the message after module installation, We have just
+  // Shown an additional message.
+  drupal_set_message(t('Hurray. We are ready to Roll!.'));
+}

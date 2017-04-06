@@ -1,0 +1,18 @@
+# Name of project.
+name: Practice
+# Defining the type of Project.
+type: module
+# Description of module.
+description: This is the practice module.
+# Package that this module will belong to.
+package: My Practice
+# Defining the core that this module belongs to.
+core: 8.x
+# Below line will be visible as Configure Link on Modules Listing Page.
+configure: system.site_information_settings
+# Adding Dependencies:
+# 1) Serialization: Provides services used to convert Objects to desired formats(Json, XML, e.t.c).
+# 2) Node: We will be using classes from Node Module.
+dependencies:
+  - drupal:serialization
+  - drupal:node

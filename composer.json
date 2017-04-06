@@ -1,0 +1,19 @@
+{
+    "name": "drupal/practice",
+    "description": "Practice module.",
+    "type": "drupal-module",
+    "keywords": ["Drupal", "Drupal 8", "Serialization", "Node"],
+    "homepage": "https://www.drupal.org/u/kunalkursija",
+    "authors": [
+        {
+            "name": "Kunal Kursija",
+            "email": "kunal.kurseja@gmail.com",
+            "role": "Drupal Developer"
+        }
+    ],
+    "support": {
+        "email": "kunal.kurseja@gmail.com",
+        "issues": "https://github.com/kunal-kursija/practice"
+    },
+    "license": "GPL-2.0"
+}
