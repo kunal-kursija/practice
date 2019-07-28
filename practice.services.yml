@@ -3,6 +3,6 @@ services:
   practice.site_api_key_service:
     # Class callback.
     class: Drupal\practice\ParamConverter\SiteApiKeyConverter
-    arguments: [@config.factory]
+    arguments: ['@config.factory']
     tags:
       - { name: paramconverter }
